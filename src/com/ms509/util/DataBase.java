@@ -3,11 +3,7 @@ package com.ms509.util;
 //数据库语句执行
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.nio.charset.UnsupportedCharsetException;
-
-import javax.swing.JTree;
-
-import sun.misc.BASE64Encoder;
+import org.apache.commons.codec.binary.*;
 
 public class DataBase {
 
@@ -110,9 +106,7 @@ public class DataBase {
 			if (Safe.PHP_BASE64.equals("1")) {
 				String payload = "";
 				try {
-					BASE64Encoder encode = new BASE64Encoder();
-
-					payload = encode.encode(Safe.PHP_DB_MYSQL.getBytes(code));
+					payload = Base64.encodeBase64String(Safe.PHP_DB_MYSQL.getBytes(code));
 					payload = URLEncoder.encode(payload);
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
@@ -294,18 +288,14 @@ public class DataBase {
 				// System.out.println("use base 64");
 				String payload = "";
 				try {
-					BASE64Encoder encode = new BASE64Encoder();
-
-					payload = encode.encode(Safe.PHP_DB_MYSQL.getBytes(code));
+					payload = Base64.encodeBase64String(Safe.PHP_DB_MYSQL.getBytes(code));
 					payload = URLEncoder.encode(payload);
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				try {
-					BASE64Encoder encode = new BASE64Encoder();
-
-					dbsql = encode.encode(sql.getBytes(code));
+					dbsql = Base64.encodeBase64String(sql.getBytes(code));
 					dbsql = URLEncoder.encode(dbsql);
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
@@ -321,7 +311,6 @@ public class DataBase {
 		case 2: // asp
 			p1 = dbhost;
 			try {
-				BASE64Encoder encode = new BASE64Encoder();
 				p1 = toHexString(p1);
 				p1 = URLEncoder.encode(p1);
 				sql = toHexString(sql);
@@ -352,7 +341,6 @@ public class DataBase {
 		case 3: // aspx
 			p1 = dbhost;
 			try {
-				BASE64Encoder encode = new BASE64Encoder();
 				if (dbhost.indexOf("Sql Server") > 0) {   //使用sql server连接模式，需要先指定数据库
 
 					if (dbn != "") {
@@ -361,9 +349,9 @@ public class DataBase {
 
 					}
 				}
-								p1 = encode.encode(p1.getBytes(code));
+								p1 = Base64.encodeBase64String(p1.getBytes(code));
 				p1 = URLEncoder.encode(p1);
-				sql = encode.encode(sql.getBytes(code));
+				sql = Base64.encodeBase64String(sql.getBytes(code));
 				sql = URLEncoder.encode(sql);
 
 			} catch (UnsupportedEncodingException e) {

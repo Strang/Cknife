@@ -463,7 +463,7 @@ public class DatabasePanel extends JPanel {
 	// 根据result结果更新table的显示内容
 	private void UpdateData(String result) {
 		DatabaseTableModel dtm = new DatabaseTableModel();
-		Vector<Object> al = new Vector<Object>();
+		Vector<Vector<Object>> al = new Vector<Vector<Object>>();
 		String[] rows = result.split("\t\\|\t\r\n");
 		datalist.removeAll();
 		Vector<Object> vtitle = new Vector<Object>();

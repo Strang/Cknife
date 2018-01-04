@@ -1,13 +1,9 @@
 package com.ms509.util;
 
-import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Vector;
-
-import sun.misc.BASE64Encoder;
+import org.apache.commons.codec.binary.*;
 
 public class FileManager {
 
@@ -32,8 +28,7 @@ public class FileManager {
 			switch (this.type) {
 			case "ASP(Eval)":
 				if (Safe.ASP_BASE64.equals("1")) {
-					BASE64Encoder encode = new BASE64Encoder();
-					param1 = encode.encode(path.getBytes(this.code));
+					param1 = Base64.encodeBase64String(path.getBytes(this.code));
 					param1 = URLEncoder.encode(param1);
 				} else {
 					//现使用16进制
@@ -52,8 +47,7 @@ public class FileManager {
 				break;
 			case "PHP(Eval)":
 				if (Safe.PHP_BASE64.equals("1")) {
-					BASE64Encoder encode = new BASE64Encoder();
-					param1 = encode.encode(path.getBytes(this.code));
+					param1 = Base64.encodeBase64String(path.getBytes(this.code));
 					param1 = URLEncoder.encode(param1);
 				} else {
 					param1 = URLEncoder.encode(path, this.code);
@@ -83,10 +77,9 @@ public class FileManager {
 				break;
 			case "ASPX(Eval)":
 				//暂时使用base64 默认编码
-				BASE64Encoder encode_aspx = new BASE64Encoder();
 				try {
 					//文件内容解码是utf－8，发送请求只能是gb2312 才不乱码， 问题标注＝＝＝＝＝＝＝＝＝＝＝＝
-				  param2 = encode_aspx.encode(data.getBytes("GB2312"));
+				  param2 = Base64.encodeBase64String(data.getBytes("GB2312"));
 				  param2 = URLEncoder.encode(param2);
 				} catch (UnsupportedEncodingException e) {
 					// TODO Auto-generated catch block
@@ -96,8 +89,7 @@ public class FileManager {
 			case "PHP(Eval)":
 				if (Safe.PHP_BASE64.equals("1")
 						&& !this.action.equals("upload")) {// 特殊情况特殊处理
-					BASE64Encoder encode = new BASE64Encoder();
-					param2 = encode.encode(data.getBytes(this.code));
+					param2 = Base64.encodeBase64String(data.getBytes(this.code));
 					param2 = URLEncoder.encode(param2);
 				} else {
 					param2 = URLEncoder.encode(data, this.code);
@@ -260,10 +252,9 @@ public class FileManager {
 				break;
 			case "upload":
 				String param3=null;
-				BASE64Encoder encode_aspx = new BASE64Encoder();
 				try {
 					//文件内容解码是utf－8，发送请求只能是gb2312 才不乱码， 问题标注＝＝＝＝＝＝＝＝＝＝＝＝
-				  param3 = encode_aspx.encode(path.getBytes(this.code));
+				  param3 = Base64.encodeBase64String(path.getBytes(this.code));
 				  param3 = URLEncoder.encode(param3);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

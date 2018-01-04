@@ -9,7 +9,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
-import sun.misc.BASE64Encoder;
+import org.apache.commons.codec.binary.*;
 
 public class Shell {
 	// asp 命令执行
@@ -188,7 +188,7 @@ public class Shell {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		tmp = (new BASE64Encoder().encode(z12)).toString() + "&"+Safe.PARAM2+"=" + (new BASE64Encoder().encode(z22)).toString();
+		tmp = (Base64.encodeBase64String(z12)).toString() + "&"+Safe.PARAM2+"=" + (Base64.encodeBase64String(z22)).toString();
 		params = Common.makeParams(Safe.PHP_MAKE, Safe.PHP_SHELL, tmp);
 		String[] index_datas = Common.send(url, params, code).split("\t");
 		String result = null;

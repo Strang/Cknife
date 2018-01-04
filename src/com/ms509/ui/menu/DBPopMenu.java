@@ -354,7 +354,7 @@ public class DBPopMenu extends JPopupMenu {
 	// 根据result结果更新table的显示内容
 	private void UpdateData(String result) {
 		DatabaseTableModel dtm = new DatabaseTableModel();
-		Vector<Object> al = new Vector<Object>();
+		Vector<Vector<Object>> al = new Vector<Vector<Object>>();
 		String[] rows = result.split("\t\\|\t\r\n");
 		table.removeAll();
 		Vector<Object> vtitle = new Vector<Object>();
@@ -436,7 +436,7 @@ public class DBPopMenu extends JPopupMenu {
 		//System.out.println(tables);
 		// table 显示 向量
 		final DatabaseTableModel dtm = new DatabaseTableModel();
-		Vector<Object> al = new Vector<Object>();
+		Vector<Vector<Object>> al = new Vector<Vector<Object>>();
 		String[] rows = tables.split("\\|\t\r\n");
 		table.removeAll();
 		Vector<Object> vtitle = new Vector<Object>();
@@ -452,7 +452,7 @@ public class DBPopMenu extends JPopupMenu {
 				Vector<Object> vector = new Vector<Object>();
 				for (int m = 0; m < columns; m++) {
 					if (m == 0) {
-						vector.add(new ImageIcon("".getClass().getResource("/com/ms509/images/data.png")));
+						vector.add(new ImageIcon("resources/data.png"));
 					}
 					// 添加到向量vector中，后续加入到table里面显示
 					vector.add(cols[m].replace("\t", ""));
